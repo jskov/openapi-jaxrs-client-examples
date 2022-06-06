@@ -1,5 +1,66 @@
 plugins {
     id 'eclipse'
     id 'java'
+    id 'dk.mada.jaxrs' version "$pluginVersion"
 }
 
+repositories {
+    if (System.getProperty("profile") == "local") {
+        mavenLocal()
+    }
+    mavenCentral()
+}
+
+jaxrs {
+    generatorGAV = "dk.mada.jaxrs:openapi-jaxrs-client:$generatorVersion"
+
+    // openApiDocDirectory = file("src/openapi")
+    // buildOutputDirectory = file("build/java-jaxrs")
+    // srcOutputDirectory = file("src/main/java-jaxrs")
+    
+    clients {
+        //-----------------------------
+        // The 'petstore' client uses the convention values of the plugin/task
+        //
+        // Tasks created:
+        //  downloadDocumentPetstore (when download() is active)
+        //  generateClientPetstore
+        //
+        // The document is downloaded to src/openapi/petstore.yaml
+        // The source is generated to src/main/java-jaxrs/petstore
+
+        petstore {
+            //download("https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml")
+        }
+
+        //-----------------------------
+        // The 'petstore-json' client uses custom configuration
+        //
+        // Tasks created:
+        //  downloadDocumentPetstorejson (when download() is active)
+        //  generateClientPetstorejson
+        //   (this is added as a dependency to the 'compileJava' task)
+        //
+        // The document is downloaded to src/openapi/petstore-json.json
+        // The source is generated to build/java-jaxrs/petstore-json
+
+        'petstore-json' {
+            //download("https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json")
+            documentExtension = ".json"
+            transientSource()
+        }
+    }
+}
+
+dependencies {
+    implementation  'javax.annotation:javax.annotation-api:1.3.2'
+    implementation  'javax.json.bind:javax.json.bind-api:1.0'
+    // FIXME: want jakarta as default!
+//    implementation  'jakarta.annotation:jakarta.annotation-api:2.1.0'
+//    implementation  'jakarta.json.bind:jakarta.json.bind-api:3.0.0'
+    implementation  'io.quarkus:quarkus-rest-client:2.9.0.Final'
+    implementation  'javax.ws.rs:javax.ws.rs-api:2.1.1'
+    implementation  'javax.json:javax.json-api:1.1.4'
+    implementation  'org.eclipse.microprofile.openapi:microprofile-openapi-api:3.0'
+    implementation  'org.eclipse.microprofile.rest.client:microprofile-rest-client-api:3.0'
+}

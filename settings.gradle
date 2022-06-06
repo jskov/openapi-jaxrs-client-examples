@@ -1,0 +1,8 @@
+pluginManagement {
+    if (System.getProperty("profile") == "local") {
+        println "Local dev plugin"
+        includeBuild '../openapi-jaxrs-client'
+    } else {
+        println "Official built plugin"
+    }
+}
