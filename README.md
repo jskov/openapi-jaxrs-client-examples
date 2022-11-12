@@ -3,6 +3,12 @@
 Example use of openapi-jaxrs-client generator
 
 
+## Regenerate
+
+When updating the generator version, the source can be regenerated with:
+
+    ./gradlew regen
+
 ## Plugin development
 
 To use plugin from sibling project run the script:
