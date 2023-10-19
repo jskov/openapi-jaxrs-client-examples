@@ -26,8 +26,8 @@ public interface PetsApi {
   /**
    * List all pets.
    *
-   * @param limit  (optional)
-   * @return List&lt;Pet&gt;
+   * @param limit How many items to return at one time (max 100) (optional)
+   * @return List<Pet>
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -42,8 +42,6 @@ public interface PetsApi {
 
   /**
    * Create a pet.
-   *
-   * @return Error
    */
   @POST
   @Produces(MediaType.APPLICATION_JSON)
@@ -53,12 +51,12 @@ public interface PetsApi {
     @APIResponse(responseCode = "201", description = "Null response")
   })
   @Operation(summary = "Create a pet")
-  Error createPets();
+  void createPets();
 
   /**
    * Info for a specific pet.
    *
-   * @param petId  (required)
+   * @param petId The id of the pet to retrieve (required)
    * @return Pet
    */
   @GET

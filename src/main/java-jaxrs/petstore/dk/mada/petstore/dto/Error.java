@@ -8,17 +8,12 @@ package dk.mada.petstore.dto;
 
 import java.util.Objects;
 import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.validation.constraints.NotNull;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Error
  */
-@JsonbPropertyOrder({
-  Error.JSON_PROPERTY_CODE,
-  Error.JSON_PROPERTY_MESSAGE
-})
 @javax.annotation.processing.Generated(value = "dk.mada.jaxrs.Generator")
 public class Error {
   public static final String JSON_PROPERTY_CODE = "code";
@@ -72,7 +67,7 @@ public class Error {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Error)) {
       return false;
     }
     Error other = (Error) o;

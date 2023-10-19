@@ -8,18 +8,12 @@ package dk.mada.petstore.dto;
 
 import java.util.Objects;
 import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.validation.constraints.NotNull;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Pet
  */
-@JsonbPropertyOrder({
-  Pet.JSON_PROPERTY_ID,
-  Pet.JSON_PROPERTY_NAME,
-  Pet.JSON_PROPERTY_TAG
-})
 @javax.annotation.processing.Generated(value = "dk.mada.jaxrs.Generator")
 public class Pet {
   public static final String JSON_PROPERTY_ID = "id";
@@ -94,7 +88,7 @@ public class Pet {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Pet)) {
       return false;
     }
     Pet other = (Pet) o;
