@@ -5,10 +5,10 @@ plugins {
 }
 
 repositories {
+    mavenCentral()
     if (System.getProperty("profile") == "local") {
         mavenLocal()
     }
-    mavenCentral()
 }
 
 jaxrs {
