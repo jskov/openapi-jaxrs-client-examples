@@ -9,6 +9,8 @@ package dk.mada.petstore.api;
 import dk.mada.petstore.dto.Error;
 import dk.mada.petstore.dto.Pet;
 import java.util.List;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -38,12 +40,15 @@ public interface PetsApi {
                  content = @Content(schema = @Schema(implementation = Pet.class, type = SchemaType.ARRAY)))
   })
   @Operation(summary = "List all pets")
-  List<Pet> listPets(@QueryParam("limit") int limit);
+  List<Pet> listPets(@QueryParam("limit") @Max(100L) int limit);
 
   /**
    * Create a pet.
+   *
+   * @param dto  (not null)
    */
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @APIResponses({
     @APIResponse(responseCode = "default", description = "unexpected error",
@@ -51,12 +56,12 @@ public interface PetsApi {
     @APIResponse(responseCode = "201", description = "Null response")
   })
   @Operation(summary = "Create a pet")
-  void createPets();
+  void createPets(@NotNull @Valid Pet dto);
 
   /**
    * Info for a specific pet.
    *
-   * @param petId The id of the pet to retrieve (required)
+   * @param petId The id of the pet to retrieve (not null)
    * @return Pet
    */
   @GET
