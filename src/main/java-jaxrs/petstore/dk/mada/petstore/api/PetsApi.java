@@ -10,7 +10,6 @@ import dk.mada.petstore.dto.Error;
 import dk.mada.petstore.dto.Pet;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -28,7 +27,7 @@ public interface PetsApi {
   /**
    * List all pets.
    *
-   * @param limit How many items to return at one time (max 100) (optional)
+   * @param limit How many items to return at one time (max 100)
    * @return List<Pet>
    */
   @GET
@@ -40,7 +39,7 @@ public interface PetsApi {
                  content = @Content(schema = @Schema(implementation = Pet.class, type = SchemaType.ARRAY)))
   })
   @Operation(summary = "List all pets")
-  List<Pet> listPets(@QueryParam("limit") @Max(100L) int limit);
+  List<Pet> listPets(@QueryParam("limit") int limit);
 
   /**
    * Create a pet.
