@@ -2,6 +2,7 @@ plugins {
     id 'eclipse'
     id 'java'
     id 'dk.mada.jaxrs' version "$pluginVersion"
+    id 'dk.mada.style' version "$stylePluginVersion"
 }
 
 repositories {
