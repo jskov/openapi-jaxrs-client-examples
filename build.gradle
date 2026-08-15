@@ -6,7 +6,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    if (System.getProperty("profile") == "local") {
+    if (System.getProperty("profile", "default").startsWith("local")) {
         mavenLocal()
     }
 }
